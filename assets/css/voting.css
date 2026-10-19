@@ -1,0 +1,334 @@
+/* =========================================================
+   SIDIA BAPERAN — Voting Petugas Terbaik
+   Gaya disamakan dengan landing.css (teal Karantina + kuning bendera)
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #f2f7f7;
+    --surface: #ffffff;
+    --field: #ffffff;
+    --ink: #0f2a33;
+    --muted: #52666e;
+    --line: #d3e1e2;
+
+    --brand: #0a6b67;
+    --brand-deep: #06464a;
+    --brand-soft: #dff1ee;
+    --flag: #f5b722;
+    --on-flag: #3a2a00;
+    --on-brand: #ffffff;
+    --danger: #b42318;
+
+    --radius: 14px;
+    --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+body.dark-mode {
+    --bg: #0a181d;
+    --surface: #11262c;
+    --field: #0d1f24;
+    --ink: #e6f1f1;
+    --muted: #93a9ae;
+    --line: #234049;
+
+    --brand: #3cc4b0;
+    --brand-deep: #052a2d;
+    --brand-soft: #16393e;
+    --on-brand: #06292b;
+    --danger: #ff8a7a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0 0 56px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    transition: background .25s, color .25s;
+}
+
+/* Pita teal di belakang kartu, sama dengan hero di landing page */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: var(--brand-deep);
+    border-bottom: 4px solid var(--flag);
+    z-index: -1;
+}
+
+body::after {
+    content: 'SIDIA BAPERAN';
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(800px, calc(100% - 40px));
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+}
+
+a { color: var(--brand); }
+
+:focus-visible {
+    outline: 3px solid var(--flag);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 76px 20px 0;
+}
+
+/* ---------- Kartu ---------- */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 36px 36px 32px;
+    box-shadow: 0 10px 30px rgba(6, 70, 74, .12);
+}
+
+.card h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+}
+
+/* Bendera kuning karantina */
+.card h2::before {
+    content: '';
+    flex: none;
+    width: 22px;
+    height: 26px;
+    background: var(--flag);
+    clip-path: polygon(0 0, 100% 0, 72% 40%, 100% 80%, 0 80%, 0 100%, 0 100%);
+    border-left: 3px solid var(--brand);
+}
+
+.wilker-note {
+    margin: 0 0 28px;
+    font-size: .92rem;
+    color: var(--muted);
+}
+.wilker-note strong { color: var(--brand); }
+
+/* ---------- Tombol ---------- */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--on-brand);
+    background: var(--brand);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: filter .15s, transform .15s;
+}
+.btn-submit:hover { filter: brightness(1.1); }
+.btn-submit:active { transform: scale(.98); }
+
+.btn-back {
+    display: inline-block;
+    padding: 8px 14px;
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--brand);
+    text-decoration: none;
+    border-radius: 999px;
+    transition: background .15s;
+}
+.btn-back:hover { background: var(--brand-soft); }
+
+.btn-download {
+    display: inline-block;
+    padding: 12px 22px;
+    font-weight: 700;
+    color: var(--on-flag);
+    background: var(--flag);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: filter .15s, transform .15s;
+}
+.btn-download:hover { filter: brightness(1.08); }
+.btn-download:active { transform: scale(.98); }
+
+/* ---------- Pesan berhasil ---------- */
+.alert-success {
+    margin-top: 20px;
+    padding: 24px;
+    text-align: center;
+    background: var(--brand-soft);
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--flag);
+    border-radius: var(--radius);
+}
+
+.alert-success h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--brand);
+}
+
+.alert-success p { margin: 8px 0 0; }
+
+.alert-success .note {
+    font-size: .85rem;
+    color: var(--muted);
+}
+
+.code-box {
+    display: inline-block;
+    margin: 14px 0;
+    padding: 12px 28px;
+    font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--ink);
+    background: var(--surface);
+    border: 2px dashed var(--brand);
+    border-radius: 12px;
+    user-select: all;
+}
+
+.success-actions { margin: 22px 0 6px; }
+.back-wrap { text-align: center; margin-top: 18px; }
+
+/* ---------- Responsif ---------- */
+@media (max-width: 600px) {
+    .container { padding: 70px 14px 0; }
+    .card { padding: 24px 18px 22px; border-radius: 16px; }
+    .radio-group { grid-template-columns: 1fr; }
+    .code-box { font-size: 1.4rem; padding: 10px 18px; }
+}
+
+/* ---------- Voting petugas ---------- */
+.alert-success {
+    margin: 0 0 20px;
+    padding: 16px 20px;
+    font-weight: 600;
+    color: var(--brand);
+}
+
+.alert-error,
+.alert-info {
+    margin-bottom: 20px;
+    padding: 14px 18px;
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+}
+
+.alert-error {
+    color: #8a1c12;
+    background: #fdecea;
+    border-color: #f3b8b1;
+    border-left: 6px solid #d92d20;
+}
+body.dark-mode .alert-error {
+    color: #ffb4a9;
+    background: #3a1a17;
+    border-color: #6b2b25;
+}
+
+.alert-info {
+    color: var(--ink);
+    background: var(--brand-soft);
+}
+.alert-info strong { color: var(--brand); }
+
+.empty-state {
+    margin: 0;
+    padding: 36px 0;
+    text-align: center;
+    color: var(--muted);
+}
+
+.petugas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+.petugas-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    transition: border-color .15s;
+}
+.petugas-card:hover { border-color: var(--brand); }
+
+.petugas-card h3 {
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+.petugas-card p {
+    margin: 0 0 18px;
+    font-size: .92rem;
+    color: var(--muted);
+}
+
+.petugas-card form { margin-top: auto; }
+
+.btn-vote {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    padding: 12px 16px;
+    font-family: inherit;
+    font-size: .98rem;
+    font-weight: 700;
+    color: var(--on-brand);
+    background: var(--brand);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: filter .15s, transform .15s;
+}
+.btn-vote:hover { filter: brightness(1.1); }
+.btn-vote:active { transform: scale(.98); }
+
+.btn-vote:disabled {
+    color: var(--muted);
+    background: var(--brand-soft);
+    cursor: not-allowed;
+    filter: none;
+    transform: none;
+}
+
+.back-wrap { margin-top: 22px; }

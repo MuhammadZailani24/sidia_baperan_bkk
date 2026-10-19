@@ -1,0 +1,353 @@
+/* ==========================================================
+   SIDIA BAPERAN — Panel Admin
+   Gaya disamakan dengan sisi publik (teal Karantina + kuning bendera).
+   Nama class tidak diubah, jadi halaman admin yang ada tetap cocok.
+   ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg: #f2f7f7;
+    --surface: #ffffff;
+    --field: #ffffff;
+    --ink: #0f2a33;
+    --muted: #52666e;
+    --line: #d3e1e2;
+
+    --brand: #0a6b67;
+    --brand-deep: #06464a;
+    --brand-soft: #dff1ee;
+    --flag: #f5b722;
+    --on-flag: #3a2a00;
+    --on-brand: #ffffff;
+
+    --success: #187a4a;
+    --danger: #c2392b;
+    --neutral: #5b6b73;
+
+    --radius: 14px;
+    --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Aktif jika halaman admin menambahkan class "dark-mode" pada <body> */
+body.dark-mode {
+    --bg: #0a181d;
+    --surface: #11262c;
+    --field: #0d1f24;
+    --ink: #e6f1f1;
+    --muted: #93a9ae;
+    --line: #234049;
+
+    --brand: #3cc4b0;
+    --brand-deep: #052a2d;
+    --brand-soft: #16393e;
+    --on-brand: #06292b;
+
+    --success: #3fbf86;
+    --danger: #ff7d6e;
+    --neutral: #7f939b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    transition: background .25s, color .25s;
+}
+
+input, select, textarea, button { font-family: inherit; }
+
+a { color: var(--brand); }
+
+:focus-visible {
+    outline: 3px solid var(--flag);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 32px auto;
+    padding: 0 20px;
+}
+
+/* ==========================================================
+   KARTU & JUDUL
+   ========================================================== */
+.card {
+    background: var(--surface);
+    padding: 32px 36px;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 30px rgba(6, 70, 74, .08);
+    margin-bottom: 24px;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    line-height: 1.15;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+}
+
+/* Bendera kuning karantina */
+h2::before {
+    content: '';
+    flex: none;
+    width: 18px;
+    height: 22px;
+    background: var(--flag);
+    clip-path: polygon(0 0, 100% 0, 72% 40%, 100% 80%, 0 80%, 0 100%, 0 100%);
+    border-left: 3px solid var(--brand);
+}
+
+/* ==========================================================
+   FORM & INPUT
+   ========================================================== */
+.form-group { margin-bottom: 20px; }
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--ink);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="tel"],
+input[type="search"],
+input[type="file"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: .97rem;
+    color: var(--ink);
+    background-color: var(--field);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: .7; }
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+input[readonly] {
+    color: var(--brand);
+    background: var(--brand-soft);
+    font-weight: 600;
+    cursor: not-allowed;
+}
+
+body.dark-mode input[type="date"],
+body.dark-mode input[type="time"] { color-scheme: dark; }
+
+input[type="checkbox"], input[type="radio"] { accent-color: var(--brand); }
+
+/* ==========================================================
+   TOMBOL
+   ========================================================== */
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: .95rem;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    transition: filter .15s, transform .15s;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:active { transform: scale(.97); }
+
+/* Tombol utama (misal: Login) */
+.btn-primary {
+    width: 100%;
+    background: var(--brand);
+    color: var(--on-brand);
+}
+
+/* Tombol sukses (misal: Simpan, Update) */
+.btn-success {
+    padding: 10px 18px;
+    font-size: .9rem;
+    background: var(--success);
+    color: #fff;
+}
+body.dark-mode .btn-success { color: #06291a; }
+
+/* Tombol bahaya (misal: Hapus) */
+.btn-danger {
+    padding: 10px 18px;
+    font-size: .9rem;
+    background: var(--danger);
+    color: #fff;
+}
+body.dark-mode .btn-danger { color: #2c0905; }
+
+.btn-secondary {
+    background: var(--neutral);
+    color: #fff;
+}
+body.dark-mode .btn-secondary { color: #0a181d; }
+
+/* ==========================================================
+   TABEL DATA
+   ========================================================== */
+.table {
+    width: 100%;
+    margin-top: 22px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: .92rem;
+}
+
+.table th, .table td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--line);
+}
+
+.table th {
+    background: var(--bg);
+    color: var(--muted);
+    font-weight: 700;
+    font-size: .85rem;
+    border-bottom: 2px solid var(--brand);
+}
+
+.table th:first-child { border-top-left-radius: 10px; }
+.table th:last-child { border-top-right-radius: 10px; }
+
+.table tbody tr:hover { background-color: var(--brand-soft); }
+
+/* Tabel lebar bisa digeser ke samping di layar kecil */
+@media (max-width: 760px) {
+    .table { display: block; overflow-x: auto; white-space: nowrap; }
+}
+
+/* ==========================================================
+   BADGE STATUS
+   ========================================================== */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+.badge-warning { background: #fff4cc; color: #6b4a00; border: 1px solid #f5d97a; }
+.badge-info    { background: #dff0f7; color: #0b4f66; border: 1px solid #b5dcea; }
+.badge-success { background: var(--brand-soft); color: var(--brand-deep); border: 1px solid #a8d6cf; }
+
+body.dark-mode .badge-warning { background: #3b3010; color: #f5d97a; border-color: #5c4a15; }
+body.dark-mode .badge-info    { background: #12333f; color: #8fd3ea; border-color: #1f5163; }
+body.dark-mode .badge-success { color: #8fe3d4; border-color: #25564f; }
+
+/* ==========================================================
+   NAVIGASI ADMIN (BAR ATAS)
+   ========================================================== */
+.nav-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-bottom: 28px;
+    padding: 16px 26px;
+    background: var(--brand-deep);
+    color: #fff;
+    border-bottom: 4px solid var(--flag);
+    border-radius: 14px;
+}
+
+.nav-admin a {
+    margin-left: 18px;
+    font-size: .95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .8);
+    text-decoration: none;
+    transition: color .15s;
+}
+.nav-admin a:first-child { margin-left: 0; }
+.nav-admin a:hover { color: #fff; }
+
+/* ==========================================================
+   DASHBOARD (KARTU MENU ADMIN)
+   ========================================================== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 22px;
+}
+
+.dashboard-card {
+    display: block;
+    padding: 22px 20px;
+    color: var(--ink);
+    text-decoration: none;
+    background: var(--field);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: border-color .15s, background .15s;
+}
+
+.dashboard-card:hover {
+    border-color: var(--brand);
+    background: var(--brand-soft);
+}
+
+.dashboard-card h3 {
+    margin-bottom: 6px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    color: var(--ink);
+}
+
+.dashboard-card p {
+    font-size: .88rem;
+    color: var(--muted);
+}
+
+/* ==========================================================
+   RESPONSIF
+   ========================================================== */
+@media (max-width: 600px) {
+    .container { margin: 20px auto; padding: 0 14px; }
+    .card { padding: 22px 18px; }
+    .nav-admin { padding: 14px 18px; }
+}
